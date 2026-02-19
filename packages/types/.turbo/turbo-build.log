@@ -1,0 +1,4 @@
+
+> @efjoule/types@0.1.0 build /home/e-saru/EfJoule-Luxury-Afro-futurist-Jewelry/packages/types
+> tsc -p tsconfig.json
+

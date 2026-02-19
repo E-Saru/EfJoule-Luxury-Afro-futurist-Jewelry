@@ -1,0 +1,12 @@
+
+> @efjoule/api@0.1.0 lint /home/e-saru/EfJoule-Luxury-Afro-futurist-Jewelry/apps/api
+> eslint "src/**/*.ts" --ext .ts
+
+
+/home/e-saru/EfJoule-Luxury-Afro-futurist-Jewelry/apps/api/src/modules/products/products.service.ts
+   9:25  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  10:68  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  18:68  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+✖ 3 problems (0 errors, 3 warnings)
+

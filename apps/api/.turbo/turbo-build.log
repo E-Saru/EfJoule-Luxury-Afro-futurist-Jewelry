@@ -1,0 +1,4 @@
+
+> @efjoule/api@0.1.0 build /home/e-saru/EfJoule-Luxury-Afro-futurist-Jewelry/apps/api
+> tsc -p tsconfig.json
+

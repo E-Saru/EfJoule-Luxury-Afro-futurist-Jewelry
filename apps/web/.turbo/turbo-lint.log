@@ -1,0 +1,7 @@
+
+> @efjoule/web@0.1.0 lint /home/e-saru/EfJoule-Luxury-Afro-futurist-Jewelry/apps/web
+> next lint
+
+
+ ⚠ The Next.js plugin was not detected in your ESLint configuration. See https://nextjs.org/docs/basic-features/eslint#migrating-existing-config
+✔ No ESLint warnings or errors

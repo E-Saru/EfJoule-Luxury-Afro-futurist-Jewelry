@@ -1,0 +1,12 @@
+{
+  "extends": "../../packages/config/tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@efjoule/*": ["../*/src"]
+    }
+  },
+  "include": ["next-env.d.ts", "app", "src", "next.config.mjs"],
+  "exclude": ["node_modules"]
+}

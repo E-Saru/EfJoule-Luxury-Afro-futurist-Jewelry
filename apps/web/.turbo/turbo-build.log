@@ -1,0 +1,37 @@
+
+> @efjoule/web@0.1.0 build /home/e-saru/EfJoule-Luxury-Afro-futurist-Jewelry/apps/web
+> next build
+
+  ▲ Next.js 14.2.35
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+
+ ⚠ The Next.js plugin was not detected in your ESLint configuration. See https://nextjs.org/docs/basic-features/eslint#migrating-existing-config
+   Collecting page data ...
+   Generating static pages (0/8) ...
+   Generating static pages (2/8) 
+   Generating static pages (4/8) 
+   Generating static pages (6/8) 
+ ✓ Generating static pages (8/8)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    728 B           216 kB
+├ ○ /_not-found                          872 B          88.1 kB
+├ ○ /account                             728 B           216 kB
+├ ○ /checkout                            728 B           216 kB
+├ ○ /collections                         728 B           216 kB
+├ ○ /create-custom                       728 B           216 kB
+└ ƒ /product/[slug]                      1.13 kB         216 kB
++ First Load JS shared by all            87.2 kB
+  ├ chunks/5b8f0dd8-afc0bace80dd51c8.js  53.6 kB
+  ├ chunks/749-303e525d25046205.js       31.7 kB
+  └ other shared chunks (total)          1.86 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

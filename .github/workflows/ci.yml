@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Enable corepack and pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck (workspace)
+        run: pnpm -w run typecheck
+
+      - name: Lint
+        run: pnpm -w run lint
+
+      - name: Build frontend (web)
+        run: npx turbo run build --filter=web
+
+      - name: Build backend (api)
+        run: npx turbo run build --filter=api
+
+      - name: Validate Prisma schema
+        run: npx prisma validate --schema=prisma/schema.prisma

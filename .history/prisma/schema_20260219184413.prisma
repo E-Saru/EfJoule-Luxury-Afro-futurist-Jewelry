@@ -1,0 +1,138 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  CANCELLED
+}
+
+enum ProductCategory {
+  NECKLACE
+  RING
+  BRACELET
+  EARRING
+}
+
+enum GemstoneType {
+  DIAMOND
+  RUBY
+  SAPPHIRE
+  EMERALD
+}
+
+model User {
+  id        String         @id @default(uuid()) @db.Uuid
+  email     String         @unique
+  name      String?
+  orders    Order[]
+  designs   CustomDesign[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+}
+
+model Collection {
+  id          String    @id @default(uuid()) @db.Uuid
+  title       String
+  slug        String    @unique
+  description String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Product {
+  id           String              @id @default(uuid()) @db.Uuid
+  slug         String              @unique
+  title        String
+  description  String?
+  category     ProductCategory
+  priceCents   Int
+  collection   Collection?         @relation(fields: [collectionId], references: [id])
+  collectionId String?             @db.Uuid
+  materials    ProductMaterial[]
+  gemstones    ProductGemstone[]
+  orderItems    OrderItem[]
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+}
+
+model Material {
+  id          String             @id @default(uuid()) @db.Uuid
+  name        String
+  description String?
+  products    ProductMaterial[]
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+}
+
+model Gemstone {
+  id          String             @id @default(uuid()) @db.Uuid
+  type        GemstoneType
+  carat       Float
+  products    ProductGemstone[]
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+}
+
+model ProductMaterial {
+  id         String   @id @default(uuid()) @db.Uuid
+  product    Product  @relation(fields: [productId], references: [id])
+  productId  String   @db.Uuid
+  material   Material @relation(fields: [materialId], references: [id])
+  materialId String   @db.Uuid
+
+  @@unique([productId, materialId])
+}
+
+model ProductGemstone {
+  id         String   @id @default(uuid()) @db.Uuid
+  product    Product  @relation(fields: [productId], references: [id])
+  productId  String   @db.Uuid
+  gemstone   Gemstone @relation(fields: [gemstoneId], references: [id])
+  gemstoneId String   @db.Uuid
+
+  @@unique([productId, gemstoneId])
+}
+
+model Order {
+  id         String      @id @default(uuid()) @db.Uuid
+  user       User        @relation(fields: [userId], references: [id])
+  userId     String      @db.Uuid
+  items      OrderItem[]
+  status     OrderStatus @default(PENDING)
+  totalCents Int
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  @@index([userId])
+}
+
+model OrderItem {
+  id             String  @id @default(uuid()) @db.Uuid
+  order          Order   @relation(fields: [orderId], references: [id])
+  orderId        String  @db.Uuid
+  product        Product @relation(fields: [productId], references: [id])
+  productId      String  @db.Uuid
+  quantity       Int
+  unitPriceCents Int
+}
+
+model CustomDesign {
+  id        String   @id @default(uuid()) @db.Uuid
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.Uuid
+  name      String
+  specs     Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}

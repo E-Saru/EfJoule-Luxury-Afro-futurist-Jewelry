@@ -1,0 +1,4 @@
+
+> @efjoule/ui@0.1.0 build /home/e-saru/EfJoule-Luxury-Afro-futurist-Jewelry/packages/ui
+> tsc -p tsconfig.json
+
